@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment 3 - Tabular Data Visualization</title>
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  </head>
+  <body>
+    <main>
+      <div class="container py-4">
+        <header class="pb-3 mb-4 border-bottom text-center">
+            <span class="fs-1">Assignment 3 - Tabular Data Visualization</span></br></br>
+            <span class="fs-6"><strong>Hypothesis:</strong> Graduate full-time employment rates across Singapore universities show broadly similar trends, though some universities experience noticeable year-to-year differences.</span></br></br>
+            <span class="fs-6">
+              <strong>Background:</strong> The Graduate Employment Survey (GES) is an annual initiative by Singapore's 
+              Ministry of Education, surveying graduates from major universities about six months after graduation. It provides 
+              comprehensive employment data to help prospective students understand job market trends and make informed 
+              educational choices.
+            </span></br>
+        </header>
+      
+        <div id='viz1' class="p-5 mb-3 bg-body-tertiary rounded-3">
+          <div class="container-fluid py-1 text-center">
+            
+            </div>
+            <div class="row">
+              <div class="col">
+                <div id="my_dataviz1"></div>
+              </div>
+              <div class="col">
+                <div id="my_dataviz2"></div>
+              </div>
+            </div>
+     <script>
+      const data = [
+  {
+    "year": 2013,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 81.7125
+  },
+  {
+    "year": 2013,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 85.5090909091
+  },
+  {
+    "year": 2013,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 91.3
+  },
+  {
+    "year": 2014,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 80.2484848485
+  },
+  {
+    "year": 2014,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 85.8764705882
+  },
+  {
+    "year": 2014,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 88.1833333333
+  },
+  {
+    "year": 2014,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 88.7
+  },
+  {
+    "year": 2015,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 81.0424242424
+  },
+  {
+    "year": 2015,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 85.3083333333
+  },
+  {
+    "year": 2015,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 83.776
+  },
+  {
+    "year": 2015,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 91.7
+  },
+  {
+    "year": 2015,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 81.2
+  },
+  {
+    "year": 2016,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 77.2647058824
+  },
+  {
+    "year": 2016,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 80.7705882353
+  },
+  {
+    "year": 2016,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 78.2615384615
+  },
+  {
+    "year": 2016,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 91.1416666667
+  },
+  {
+    "year": 2016,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 88.3666666667
+  },
+  {
+    "year": 2017,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 74.7228571429
+  },
+  {
+    "year": 2017,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 80.5783783784
+  },
+  {
+    "year": 2017,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 82.6142857143
+  },
+  {
+    "year": 2017,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 90.1916666667
+  },
+  {
+    "year": 2017,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 90.9
+  },
+  {
+    "year": 2018,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 79.0054054054
+  },
+  {
+    "year": 2018,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 80.6848484848
+  },
+  {
+    "year": 2018,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 83.396875
+  },
+  {
+    "year": 2018,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 89.0
+  },
+  {
+    "year": 2018,
+    "university": "Singapore University of Social Sciences",
+    "employment_rate_ft_perm": 88.5
+  },
+  {
+    "year": 2018,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 89.525
+  },
+  {
+    "year": 2019,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 79.5657894737
+  },
+  {
+    "year": 2019,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 83.3666666667
+  },
+  {
+    "year": 2019,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 83.1451612903
+  },
+  {
+    "year": 2019,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 91.0416666667
+  },
+  {
+    "year": 2019,
+    "university": "Singapore University of Social Sciences",
+    "employment_rate_ft_perm": 79.025
+  },
+  {
+    "year": 2019,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 86.25
+  },
+  {
+    "year": 2020,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 69.74
+  },
+  {
+    "year": 2020,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 71.9564102564
+  },
+  {
+    "year": 2020,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 68.7486486486
+  },
+  {
+    "year": 2020,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 79.5666666667
+  },
+  {
+    "year": 2020,
+    "university": "Singapore University of Social Sciences",
+    "employment_rate_ft_perm": 59.8571428571
+  },
+  {
+    "year": 2020,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 85.05
+  },
+  {
+    "year": 2021,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 81.1846153846
+  },
+  {
+    "year": 2021,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 86.2552631579
+  },
+  {
+    "year": 2021,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 85.6212121212
+  },
+  {
+    "year": 2021,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 90.4333333333
+  },
+  {
+    "year": 2021,
+    "university": "Singapore University of Social Sciences",
+    "employment_rate_ft_perm": 78.55
+  },
+  {
+    "year": 2021,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 90.7
+  },
+  {
+    "year": 2022,
+    "university": "Nanyang Technological University",
+    "employment_rate_ft_perm": 85.543902439
+  },
+  {
+    "year": 2022,
+    "university": "National University of Singapore",
+    "employment_rate_ft_perm": 86.4184210526
+  },
+  {
+    "year": 2022,
+    "university": "Singapore Institute of Technology",
+    "employment_rate_ft_perm": 85.58
+  },
+  {
+    "year": 2022,
+    "university": "Singapore Management University",
+    "employment_rate_ft_perm": 92.1166666667
+  },
+  {
+    "year": 2022,
+    "university": "Singapore University of Social Sciences",
+    "employment_rate_ft_perm": 83.525
+  },
+  {
+    "year": 2022,
+    "university": "Singapore University of Technology and Design",
+    "employment_rate_ft_perm": 87.5
+  }
+];
+     </script>
+     <style>
+      body { font-family: sans-serif; margin: 40px; }
+      .line { fill: none; stroke-width: 2px; }
+      .tooltip {
+        position: absolute;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 1px solid #ddd;
+        padding: 8px;
+        border-radius: 4px;
+        pointer-events: none;
+        font-size: 12px;
+      }
+     </style>
+     <body>
+      <span class="fs-6">
+       Full-time Employment Rates of Singapore Universities (2013–2022)
+      </span>
+      <svg height="520" width="800">
+      </svg>
+      <script>
+       const svg = d3.select("svg"),
+          margin = {top: 40, right: 40, bottom: 40, left: 50},
+          width = +svg.attr("width") - margin.left - margin.right,
+          height = +svg.attr("height") - margin.top - margin.bottom - 120, // 减小图表高度，为下方的图例留出空间
+          g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
+
+    const x = d3.scaleLinear()
+                .domain(d3.extent(data, d => d.year))
+                .range([0, width]);
+
+    const y = d3.scaleLinear()
+                .domain([
+                  d3.min(data, d => d.employment_rate_ft_perm) - 2,
+                  d3.max(data, d => d.employment_rate_ft_perm) + 1
+                ])
+                .range([height, 0]);
+
+    const color = d3.scaleOrdinal(d3.schemeTableau10);
+
+    const line = d3.line()
+      .x(d => x(d.year))
+      .y(d => y(d.employment_rate_ft_perm));
+
+    const universities = Array.from(new Set(data.map(d => d.university)));
+
+    const dataByUniversity = Array.from(
+      d3.group(data, d => d.university),
+      ([university, values]) => ({ university, values })
+    );
+
+    g.append("g")
+      .attr("transform", `translate(0,${height})`)
+      .call(d3.axisBottom(x).tickFormat(d3.format("d")));
+
+    g.append("g")
+      .call(d3.axisLeft(y));
+
+    const tooltip = d3.select("body").append("div")
+      .attr("class", "tooltip")
+      .style("opacity", 0);
+
+    g.selectAll(".line")
+      .data(dataByUniversity)
+      .join("path")
+        .attr("class", "line")
+        .attr("stroke", d => color(d.university))
+        .attr("d", d => line(d.values))
+        .on("mouseover", function (event, d) {
+          d3.selectAll(".line").attr("stroke-opacity", 0.2);
+          d3.select(this).attr("stroke-opacity", 1).attr("stroke-width", 3);
+        })
+        .on("mouseout", function () {
+          d3.selectAll(".line").attr("stroke-opacity", 1).attr("stroke-width", 2);
+        });
+
+    g.selectAll("circle")
+      .data(data)
+      .join("circle")
+        .attr("cx", d => x(d.year))
+        .attr("cy", d => y(d.employment_rate_ft_perm))
+        .attr("r", 2.5) // 减小点的大小
+        .attr("fill", d => color(d.university))
+        .on("mouseover", (event, d) => {
+          tooltip.transition().duration(100).style("opacity", 1);
+          tooltip.html(`<strong>${d.university}</strong><br>Year: ${d.year}<br>Rate: ${d.employment_rate_ft_perm.toFixed(1)}%`)
+                 .style("left", (event.pageX + 10) + "px")
+                 .style("top", (event.pageY - 28) + "px");
+        })
+        .on("mouseout", () => tooltip.transition().duration(200).style("opacity", 0));
+      
+    // 删除所有现有的图例
+    d3.selectAll(".legend").remove();
+    d3.select("#legend").remove();
+
+    // 创建新的图例区域，位置更靠下
+    const legendContainer = svg.append("g")
+      .attr("class", "legend")
+      // 将图例位置向下移动更多
+      .attr("transform", `translate(${margin.left}, ${height + margin.top + 35})`);
+
+    // 设置图例布局参数
+    const legendItemsPerRow = 2; // 每行显示2个图例项，确保有足够空间显示全称
+    const legendItemWidth = 350; // 增加宽度以适应全称
+    const legendItemHeight = 18; // 调整高度
+    const legendPadding = 5;  // 图例内边距
+
+    // 为图例添加标题，并向下移动
+    legendContainer.append("text")
+      .attr("x", 0)
+      .attr("y", -10)
+      .attr("font-weight", "bold")
+      .attr("font-size", "11px")
+      .text("Universities");
+
+    // 添加图例项，使用全称
+    universities.forEach((univ, i) => {
+      const row = Math.floor(i / legendItemsPerRow);
+      const col = i % legendItemsPerRow;
+      
+      const legendRow = legendContainer.append("g")
+        .attr("transform", `translate(${col * legendItemWidth}, ${row * legendItemHeight + 10})`);
+      
+      // 添加图例色块
+      legendRow.append("rect")
+        .attr("width", 12)
+        .attr("height", 12)
+        .attr("fill", color(univ));
+      
+      // 添加图例文本 - 使用全称
+      legendRow.append("text")
+        .attr("x", 18)
+        .attr("y", 6)
+        .attr("dominant-baseline", "middle")
+        .style("font-size", "10px") // 减小字体大小
+        .text(univ);
+    });
+
+    // 根据图例行数计算需要添加的高度
+    const legendHeight = Math.ceil(universities.length / legendItemsPerRow) * legendItemHeight + 30;
+      </script>
+     </body>
+    </div>
+   </div>
+  </main>
+ </body>
+</html>
+Data Source:
+<a href="https://data.gov.sg/datasets?topics=education&amp;page=1&amp;resultId=d_3c55210de27fcccda2ed0c63fdd2b352" target="_blank">
+ data.gov.sg
+</a>
+<footer class="pt-3 mt-4 text-body-secondary border-top text-center">
+  <strong>Visualization</strong>
+  <ul class="list-unstyled">
+    <li>Line chart showing employment rate trends over time, with distinct colors for each university</li>
+    <li>Interactive tooltips displaying detailed data</li>
+  </ul>
+  
+  <strong>Key Findings</strong>
+  <p>
+    The analysis shows that graduate full-time employment rates across Singapore universities follow broadly similar trends, though individual institutions experience different year-to-year variations. In 2020, during the pandemic, all universities suffered a significant decline in employment rates, demonstrating the common impact of external shocks. Notably, Singapore Management University (SMU) consistently maintained high employment rates of around 90% throughout the observation period, showcasing strong market competitiveness. Entering 2021-2022, all universities exhibited a strong recovery, not only returning to pre-pandemic levels but in some cases exceeding their previous employment performance. The National University of Singapore (NUS) demonstrated relatively stable employment rates with comparatively smaller fluctuations, reflecting a certain degree of stability for its graduates in the job market.
+  </p>
+</footer>
+
+<footer class="pt-3 mt-4 text-body-secondary border-top text-center">
+  Copyright @
+  <a href="http://cheinwong.me" target="_blank">
+    cheinwong.me
+  </a>
+</footer>
